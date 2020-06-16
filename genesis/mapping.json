@@ -1,0 +1,168 @@
+{
+    "data_sources": [
+        {
+            "id": 1,
+            "name": "CoinGecko Cryptocurrency Price",
+            "description": "Retrieves current price of a cryptocurrency from https://www.coingecko.com",
+            "filename": "coingecko_price.py"
+        },
+        {
+            "id": 2,
+            "name": "CryptoCompare Cryptocurrency Price",
+            "description": "Retrieves current price of a cryptocurrency from https://www.cryptocompare.com",
+            "filename": "crypto_compare_price.sh"
+        },
+        {
+            "id": 3,
+            "name": "Binance Cryptocurrency Price",
+            "description": "Retrieves current price of a cryptocurrency from https://www.binance.com/en",
+            "filename": "binance_price.sh"
+        },
+        {
+            "id": 4,
+            "name": "Open Weather Map Weather Data",
+            "description": "Retrieves current weather information from https://www.openweathermap.org",
+            "filename": "open_weather_map.sh"
+        },
+        {
+            "id": 5,
+            "name": "FreeForexAPI Gold Price",
+            "description": "Retrives current gold price from https://www.freeforexapi.com",
+            "filename": "gold_price.sh"
+        },
+        {
+            "id": 6,
+            "name": "Alpha Vantage Stock Price",
+            "description": "Retrives current price of a stock from https://www.alphavaage.co",
+            "filename": "alphavantage.sh"
+        },
+        {
+            "id": 7,
+            "name": "Blockchain.info Bitcoin Block Count",
+            "description": "Retrives latest Bitcoin block height from https://www.blockchain.info",
+            "filename": "bitcoin_count.sh"
+        },
+        {
+            "id": 8,
+            "name": "BlockCypher Bitcoin Block Hash",
+            "description": "Retrives Bitcoin block hash at a given block height from https://blockcypher.com",
+            "filename": "bitcoin_hash.sh"
+        },
+        {
+            "id": 9,
+            "name": "CoinGecko Cryptocurrency Trading Volume",
+            "description": "Retrieves current trading volume of a cryptocurrency from https://www.coingecko.com",
+            "filename": "coingecko_volume.sh"
+        },
+        {
+            "id": 10,
+            "name": "CryptoCompare Cryptocurrency Trading Volume",
+            "description": "Retrieves current trading volume of a cryptocurrency from https://www.cryptocompare.com",
+            "filename": "crypto_compare_volume.sh"
+        },
+        {
+            "id": 11,
+            "name": "ETH Gas Station Current Ethereum Gas Price",
+            "description": "Retrieves current Ethereum gas price from https://ethgasstation.info",
+            "filename": "ethgasstation.sh"
+        },
+        {
+            "id": 12,
+            "name": "Open Sky Network Flight Data",
+            "description": "Retrieves flight information from https://opensky-network.org",
+            "filename": "open_sky_network.sh"
+        },
+        {
+            "id": 13,
+            "name": "Quantum Random Number Generator",
+            "description": "Retrieves array of random number from https://qrng.anu.edu.au",
+            "filename": "qrng_anu.sh"
+        },
+        {
+            "id": 14,
+            "name": "Yahoo Finance Stock Price",
+            "description": "Retrieves current price of a stock from https://finance.yahoo.com",
+            "filename": "yahoo_finance.py"
+        }
+    ],
+    "oracle_scripts": [
+        {
+            "id": 1,
+            "name": "Cryptocurrency Price in USD",
+            "description": "Oracle script that queries the average cryptocurrency price using current price data from CoinGecko, CryptoCompare, and Binance",
+            "package": "crypto_price"
+        },
+        {
+            "id": 2,
+            "name": "Gold Price in ATOMs",
+            "description": "Oracle script that queries current average gold price in ATOMs using gold price data from FreeForexAPI and ATOM price from Binance",
+            "package": "gold_price"
+        },
+        {
+            "id": 3,
+            "name": "Stock Price (Alpha Vantage)",
+            "description": "Oracle script that queries the current price of a stock from Alpha Vantage",
+            "package": "alphavantage"
+        },
+        {
+            "id": 4,
+            "name": "Latest Bitcoin Block Count",
+            "description": "Oracle script that queries the latest Bitcoin block height from Blockchain.info",
+            "package": "bitcoin_block_count"
+        },
+        {
+            "id": 5,
+            "name": "Bitcoin Block Hash",
+            "description": "Oracle script that queries the Bitcoin block hash at the given block height from BlockCypher",
+            "package": "bitcoin_block_hash"
+        },
+        {
+            "id": 6,
+            "name": "CoinGecko Cryptocurrency Volume",
+            "description": "Oracle script that queries a cryptocurrency's average trading volume for the past day from Coingecko",
+            "package": "coingecko_volume"
+        },
+        {
+            "id": 7,
+            "name": "CryptoCompare Cryptocurrency Volume",
+            "description": "Oracle script that queries a cryptocurrency's average trading volume for the past day from CryptoCompare",
+            "package": "crypto_compare_volume"
+        },
+        {
+            "id": 8,
+            "name": "Ethereum Gas Price",
+            "description": "Oracle script that queries the current Ethereum gas price from ETH gas station",
+            "package": "eth_gas_station"
+        },
+        {
+            "id": 9,
+            "name": "Open Sky Network",
+            "description": "Oracle script for checking whether a given flight number exists during the given time period from OpenSky Network",
+            "package": "open_sky_network"
+        },
+        {
+            "id": 10,
+            "name": "Open Weather Map",
+            "description": "Oracle script that queries the current weather data of a location from OpenWeatherMap",
+            "package": "open_weather_map"
+        },
+        {
+            "id": 11,
+            "name": "Quantum Random Number Generator",
+            "description": "Oracle script that queries a large random number from  Australia's National University Quantum Random API.",
+            "package": "qrng"
+        },
+        {
+            "id": 12,
+            "name": "Yahoo Stock Price",
+            "description": "Oracle script that queries the current price of a stock from Yahoo Finance",
+            "package": "yahoo_price"
+        },
+        {
+            "id": 13,
+            "name": "Fair Cryptocurrency Market Price",
+            "description": "Oracle script that queries the current price of a cryptocurrency from CoinGecko, CryptoCompare, and Binance and aggregates them using the user-selected method in the selected  base currency",
+            "package": "fair_crypto_market_price"
+        }
+    ]
+}
