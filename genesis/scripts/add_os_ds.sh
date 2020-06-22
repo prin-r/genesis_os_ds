@@ -1,4 +1,5 @@
-DIR=/Users/beeb/genesis_ds_os/genesis/scripts
+DIR=`dirname "$0"`
+
 bandd add-data-source \
 	"CoinGecko Cryptocurrency Price" \
 	"Retrieves current price of a cryptocurrency from https://www.coingecko.com" \

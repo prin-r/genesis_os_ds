@@ -11,8 +11,7 @@ def gen_data_source_oracle_script(owner):
         os.path.join(dir, '../../oracle_scripts'))
 
     file = open("add_os_ds.sh", "w")
-    cwd = os.getcwd()
-    file.write(f'DIR={cwd}\n')
+    file.write(f'DIR=`dirname "$0"`\n')
 
     with open("../mapping.json") as json_file:
         data = json.load(json_file)
