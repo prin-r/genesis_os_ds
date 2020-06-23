@@ -10,7 +10,9 @@ def gen_data_source_oracle_script(owner, path):
     os_source_dir = os.path.abspath(os.path.join(dir, "../../oracle_scripts"))
 
     file = open("add_os_ds.sh", "w")
-    file.write(f"DIR={path}\n")
+    file.write("#!/bin/bash\n\n")
+    file.write("# Set `DIR` to your path of genesis directory.\n")
+    file.write(f"DIR={path}\n\n")
 
     with open("../mapping.json") as json_file:
         data = json.load(json_file)

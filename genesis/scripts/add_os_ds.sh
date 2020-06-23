@@ -1,4 +1,7 @@
-DIR=..
+#!/bin/bash
+
+# Set `DIR` to your path of genesis directory.
+DIR=~/genesis_ds_os/genesis
 
 bandd add-data-source \
 	"CoinGecko Cryptocurrency Price" \
@@ -104,7 +107,7 @@ bandd add-oracle-script \
 	"Stock Price (Alpha Vantage)" \
 	"Oracle script that queries the current price of a stock from Alpha Vantage" \
 	"{symbol:string,api_key:string,multiplier:u64}/{px:u64}" \
-	"https://ipfs.io/ipfs/QmNPM3w6LrVSsuyithKpeHaMjvzxokCVUpF8PBYzr2ZMUd" \
+	"https://ipfs.io/ipfs/QmS4szs6irBJwyZXGnLnMNedBKhYitv4Q3AAiPyqFGnKGP" \
 	band1m5lq9u533qaya4q3nfyl6ulzqkpkhge9q8tpzs \
 	$DIR/res/alphavantage.wasm
 
