@@ -10,7 +10,7 @@
 6. run `chmod +x scripts/os_to_wasm.sh` to change the access permission of os_to_wasm.script
 7. run `./scripts/os_to_wasm.sh`
 8. run `cd scripts`
-9. create virtual environment for python `phthon3 -m venv venv
+9. create virtual environment for python `python3 -m venv venv`
 10. source new env by `source venv/bin/activate`
 11. install dependency `pip install -r requirements.txt`
 12. run `python gen_os_ds.py <relative_path_to_genesis_directory>` then you will get new add_os_ds.sh in scripts folder
@@ -20,7 +20,7 @@
 1. Add new data source script to datasources folder
 2. Add new data source to mapping.json
 3. run `cd scripts`
-4. run `python3 gen_os_ds.py` then you will get new add_os_ds.sh in scripts folder
+4. run `python3 gen_os_ds.py <relative_path_to_genesis_directory>` then you will get new add_os_ds.sh in scripts folder
 
 ## How to add new oracle script
 
