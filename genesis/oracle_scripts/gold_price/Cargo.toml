@@ -9,5 +9,5 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dependencies]
-owasm2 = { version = "0.1.7"}
+owasm2 = { version = "0.1.8"}
 obi = { version = "0.0.1" }

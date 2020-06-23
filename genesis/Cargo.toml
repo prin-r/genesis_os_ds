@@ -1,5 +1,3 @@
-
-
 [workspace]
 members = [
     "oracle_scripts/crypto_price",
