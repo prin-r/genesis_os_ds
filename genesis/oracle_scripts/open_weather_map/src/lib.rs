@@ -1,4 +1,4 @@
-use obi::{get_schema, OBIDecode, OBIEncode, OBISchema};
+use obi::{OBIDecode, OBIEncode, OBISchema};
 use owasm2::{execute_entry_point, ext, oei, prepare_entry_point};
 
 #[derive(OBIDecode, OBISchema)]
@@ -17,14 +17,25 @@ struct Output {
 #[no_mangle]
 fn prepare_impl(input: Input) {
     // Open weather data source
-    let Input { country, main_field, sub_field, .. } = input;
-    oei::ask_external_data(1, 4, format!("{} {} {}", country, main_field, sub_field).as_bytes());
+    let Input {
+        country,
+        main_field,
+        sub_field,
+        ..
+    } = input;
+    oei::ask_external_data(
+        1,
+        4,
+        format!("{} {} {}", country, main_field, sub_field).as_bytes(),
+    );
 }
 
 #[no_mangle]
 fn execute_impl(input: Input) -> Output {
     let avg: f64 = ext::load_average(1);
-    Output { value: (avg * input.multiplier as f64) as u64 }
+    Output {
+        value: (avg * input.multiplier as f64) as u64,
+    }
 }
 
 prepare_entry_point!(prepare_impl);
@@ -33,6 +44,7 @@ execute_entry_point!(execute_impl);
 #[cfg(test)]
 mod tests {
     use super::*;
+    use obi::get_schema;
     use std::collections::*;
 
     #[test]

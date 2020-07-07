@@ -1,5 +1,5 @@
 use hex;
-use obi::{get_schema, OBIDecode, OBIEncode, OBISchema};
+use obi::{OBIDecode, OBIEncode, OBISchema};
 use owasm2::{execute_entry_point, ext, oei, prepare_entry_point};
 
 #[derive(OBIDecode, OBISchema)]
@@ -22,9 +22,16 @@ fn accumulate_hex_strings(strings: Vec<String>, input_size: usize) -> String {
     hex::encode(
         strings
             .iter()
-            .map(|x1| x1.split(",").map(|x2| x2.parse::<u8>().unwrap()).collect::<Vec<_>>())
+            .map(|x1| {
+                x1.split(",")
+                    .map(|x2| x2.parse::<u8>().unwrap())
+                    .collect::<Vec<_>>()
+            })
             .fold(vec![0; input_size], |acc, x1| {
-                acc.iter().zip(x1.iter()).map(|x2| x2.0 ^ x2.1).collect::<Vec<_>>()
+                acc.iter()
+                    .zip(x1.iter())
+                    .map(|x2| x2.0 ^ x2.1)
+                    .collect::<Vec<_>>()
             }),
     )
 }
@@ -42,6 +49,7 @@ execute_entry_point!(execute_impl);
 #[cfg(test)]
 mod tests {
     use super::*;
+    use obi::get_schema;
     use std::collections::*;
 
     #[test]
@@ -67,7 +75,12 @@ mod tests {
     #[test]
     fn test_accumulate_hex_strings_1_4() {
         let hex_string = accumulate_hex_strings(
-            vec![String::from("1"), String::from("26"), String::from("100"), String::from("243")],
+            vec![
+                String::from("1"),
+                String::from("26"),
+                String::from("100"),
+                String::from("243"),
+            ],
             1,
         );
         assert_eq!("8c", hex_string)

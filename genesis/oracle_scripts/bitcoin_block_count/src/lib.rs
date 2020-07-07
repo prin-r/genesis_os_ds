@@ -1,4 +1,4 @@
-use obi::{get_schema, OBIDecode, OBIEncode, OBISchema};
+use obi::{OBIDecode, OBIEncode, OBISchema};
 use owasm2::{execute_entry_point, ext, oei, prepare_entry_point};
 
 #[derive(OBIDecode, OBISchema)]
@@ -21,7 +21,9 @@ fn prepare_impl(_: Input) {
 #[no_mangle]
 fn execute_impl(_: Input) -> Output {
     let majority = ext::load_majority::<u64>(1);
-    Output { block_count: majority.unwrap() }
+    Output {
+        block_count: majority.unwrap(),
+    }
 }
 
 prepare_entry_point!(prepare_impl);
@@ -30,6 +32,7 @@ execute_entry_point!(execute_impl);
 #[cfg(test)]
 mod tests {
     use super::*;
+    use obi::get_schema;
     use std::collections::*;
 
     #[test]
@@ -40,6 +43,9 @@ mod tests {
         let input_schema = get_schema(String::from("Input"), &schema);
         let output_schema = get_schema(String::from("Output"), &schema);
         println!("{}/{}", input_schema, output_schema);
-        assert_eq!("{_unused:u8}/{block_count:u64}", format!("{}/{}", input_schema, output_schema),);
+        assert_eq!(
+            "{_unused:u8}/{block_count:u64}",
+            format!("{}/{}", input_schema, output_schema),
+        );
     }
 }

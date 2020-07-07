@@ -1,4 +1,4 @@
-use obi::{get_schema, OBIDecode, OBIEncode, OBISchema};
+use obi::{OBIDecode, OBIEncode, OBISchema};
 use owasm2::{execute_entry_point, ext, oei, prepare_entry_point};
 
 #[derive(OBIDecode, OBISchema)]
@@ -32,6 +32,7 @@ execute_entry_point!(execute_impl);
 #[cfg(test)]
 mod tests {
     use super::*;
+    use obi::get_schema;
     use std::collections::*;
 
     #[test]

@@ -1,4 +1,4 @@
-use obi::{get_schema, OBIDecode, OBIEncode, OBISchema};
+use obi::{OBIDecode, OBIEncode, OBISchema};
 use owasm2::{execute_entry_point, ext, oei, prepare_entry_point};
 
 #[derive(OBIDecode, OBISchema)]
@@ -18,7 +18,13 @@ struct Output {
 #[no_mangle]
 fn prepare_impl(input: Input) {
     // Open sky api data source
-    let Input { flight_op, airport, icao24, begin, end } = input;
+    let Input {
+        flight_op,
+        airport,
+        icao24,
+        begin,
+        end,
+    } = input;
     oei::ask_external_data(
         1,
         12,
@@ -29,7 +35,9 @@ fn prepare_impl(input: Input) {
 #[no_mangle]
 fn execute_impl(_: Input) -> Output {
     let major = ext::load_majority::<bool>(1);
-    Output { flight_existence: major.unwrap() }
+    Output {
+        flight_existence: major.unwrap(),
+    }
 }
 
 prepare_entry_point!(prepare_impl);
@@ -38,6 +46,7 @@ execute_entry_point!(execute_impl);
 #[cfg(test)]
 mod tests {
     use super::*;
+    use obi::get_schema;
     use std::collections::*;
 
     #[test]

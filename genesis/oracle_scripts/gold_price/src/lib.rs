@@ -1,4 +1,4 @@
-use obi::{get_schema, OBIDecode, OBIEncode, OBISchema};
+use obi::{OBIDecode, OBIEncode, OBISchema};
 use owasm2::{execute_entry_point, ext, oei};
 
 #[derive(OBIDecode, OBISchema)]
@@ -23,7 +23,9 @@ fn prepare() {
 fn execute_impl(input: Input) -> Output {
     let avg_gold: f64 = ext::load_average(1);
     let avg_atom: f64 = ext::load_average(2);
-    Output { px: (avg_gold * input.multiplier as f64 / avg_atom) as u64 }
+    Output {
+        px: (avg_gold * input.multiplier as f64 / avg_atom) as u64,
+    }
 }
 
 execute_entry_point!(execute_impl);
@@ -31,6 +33,7 @@ execute_entry_point!(execute_impl);
 #[cfg(test)]
 mod tests {
     use super::*;
+    use obi::get_schema;
     use std::collections::*;
 
     #[test]
@@ -41,6 +44,9 @@ mod tests {
         let input_schema = get_schema(String::from("Input"), &schema);
         let output_schema = get_schema(String::from("Output"), &schema);
         println!("{}/{}", input_schema, output_schema);
-        assert_eq!("{multiplier:u64}/{px:u64}", format!("{}/{}", input_schema, output_schema),);
+        assert_eq!(
+            "{multiplier:u64}/{px:u64}",
+            format!("{}/{}", input_schema, output_schema),
+        );
     }
 }

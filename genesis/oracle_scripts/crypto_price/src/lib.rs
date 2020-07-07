@@ -1,4 +1,4 @@
-use obi::{get_schema, OBIDecode, OBIEncode, OBISchema};
+use obi::{OBIDecode, OBIEncode, OBISchema};
 use owasm2::{execute_entry_point, oei, prepare_entry_point};
 
 fn parse_float(data: String) -> Option<f64> {
@@ -50,7 +50,9 @@ fn execute_impl(input: Input) -> Output {
             count += 1;
         }
     }
-    Output { px: (sum / (count as f64) * (input.multiplier as f64)) as u64 }
+    Output {
+        px: (sum / (count as f64) * (input.multiplier as f64)) as u64,
+    }
 }
 
 prepare_entry_point!(prepare_impl);
@@ -59,6 +61,7 @@ execute_entry_point!(execute_impl);
 #[cfg(test)]
 mod tests {
     use super::*;
+    use obi::get_schema;
     use std::collections::*;
 
     #[test]
@@ -74,7 +77,10 @@ mod tests {
             format!("{}/{}", input_schema, output_schema),
         );
 
-        let input = Input { symbol: String::from("BTC"), multiplier: 100 };
+        let input = Input {
+            symbol: String::from("BTC"),
+            multiplier: 100,
+        };
         let encoded_calldata: [u8; 15] = [0, 0, 0, 3, 66, 84, 67, 0, 0, 0, 0, 0, 0, 0, 100];
         let result: Input = OBIDecode::try_from_slice(&encoded_calldata).unwrap();
         assert_eq!(input.multiplier, result.multiplier);

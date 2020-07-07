@@ -1,4 +1,4 @@
-use obi::{get_schema, OBIDecode, OBIEncode, OBISchema};
+use obi::{OBIDecode, OBIEncode, OBISchema};
 use owasm2::{execute_entry_point, ext, oei, prepare_entry_point};
 
 #[derive(OBIDecode, OBISchema)]
@@ -38,7 +38,10 @@ fn len(arr: &Vec<f64>) -> f64 {
 }
 
 fn only_positive(arr: Vec<f64>) -> Vec<f64> {
-    arr.iter().filter(|&&x| x > 0f64).map(|&x| x).collect::<Vec<_>>()
+    arr.iter()
+        .filter(|&&x| x > 0f64)
+        .map(|&x| x)
+        .collect::<Vec<_>>()
 }
 
 fn mean(arr: Vec<f64>) -> f64 {
@@ -84,7 +87,9 @@ fn aggregate(
             if q_avg <= 0f64 {
                 Err(String::from("average of quote currency is negative"))
             } else {
-                Ok(Output { px: ((b_avg * (input.multiplier as f64)) / q_avg) as u64 })
+                Ok(Output {
+                    px: ((b_avg * (input.multiplier as f64)) / q_avg) as u64,
+                })
             }
         }
         "median" => {
@@ -94,7 +99,9 @@ fn aggregate(
             if q_med <= 0f64 {
                 Err(String::from("median of quote currency is negative"))
             } else {
-                Ok(Output { px: ((b_med * (input.multiplier as f64)) / q_med) as u64 })
+                Ok(Output {
+                    px: ((b_med * (input.multiplier as f64)) / q_med) as u64,
+                })
             }
         }
         _ => Err(String::from("unknown method")),
@@ -121,6 +128,7 @@ execute_entry_point!(execute_impl);
 #[cfg(test)]
 mod tests {
     use super::*;
+    use obi::get_schema;
     use std::collections::*;
 
     #[test]
@@ -149,7 +157,10 @@ mod tests {
         assert_eq!(expected3, only_positive(vec![0f64, 0f64, 7.000005]));
 
         let expected4: Vec<f64> = vec![0.00001, 1234.5678];
-        assert_eq!(expected4, only_positive(vec![0f64, 0.00001, 0f64, -1f64, 1234.5678]));
+        assert_eq!(
+            expected4,
+            only_positive(vec![0f64, 0.00001, 0f64, -1f64, 1234.5678])
+        );
     }
 
     #[test]
@@ -160,7 +171,9 @@ mod tests {
         assert_eq!(5.5, mean(vec![1., 2., 3., 4., 5., 6., 7., 8., 9., 10.]));
         assert_eq!(
             5.5,
-            mean(vec![0., 0., 0., 1., 2., 3., 4., 0., 0., 5., 6., 7., 8., 9., 10., 0., 0., 0.])
+            mean(vec![
+                0., 0., 0., 1., 2., 3., 4., 0., 0., 5., 6., 7., 8., 9., 10., 0., 0., 0.
+            ])
         );
     }
 
@@ -173,7 +186,9 @@ mod tests {
         assert_eq!(5.5, median(vec![5., 7., 6., 9., 8., 10., 3., 1., 4., 2.]));
         assert_eq!(
             5.5,
-            median(vec![0., 6., 0., 3., 0., 1., 0., 7., 10., 0., 0., 5., 9., 8., 2., 0., 0., 4.])
+            median(vec![
+                0., 6., 0., 3., 0., 1., 0., 7., 10., 0., 0., 5., 9., 8., 2., 0., 0., 4.
+            ])
         );
     }
 

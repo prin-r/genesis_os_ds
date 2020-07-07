@@ -1,4 +1,4 @@
-use obi::{get_schema, OBIDecode, OBIEncode, OBISchema};
+use obi::{OBIDecode, OBIEncode, OBISchema};
 use owasm2::{execute_entry_point, ext, oei, prepare_entry_point};
 
 #[derive(OBIDecode, OBISchema)]
@@ -20,7 +20,9 @@ fn prepare_impl(input: Input) {
 #[no_mangle]
 fn execute_impl(_: Input) -> Output {
     let majority = ext::load_majority::<String>(1);
-    Output { block_hash: majority.unwrap() }
+    Output {
+        block_hash: majority.unwrap(),
+    }
 }
 
 prepare_entry_point!(prepare_impl);
@@ -29,6 +31,7 @@ execute_entry_point!(execute_impl);
 #[cfg(test)]
 mod tests {
     use super::*;
+    use obi::get_schema;
     use std::collections::*;
 
     #[test]
