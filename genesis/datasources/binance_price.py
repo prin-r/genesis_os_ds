@@ -13,14 +13,15 @@ def make_json_request(url):
         "User-Agent",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36",
     )
-    return urllib.request.urlopen(req).read()
+    return json.loads(urllib.request.urlopen(req).read())
 
 
 def main(symbol):
-    res = json.loads(make_json_request(PRICE_URL.format(symbol)))
+    res = make_json_request(PRICE_URL.format(symbol))
     bid = float(res["bids"][0][0])
     ask = float(res["asks"][0][0])
-    return (bid+ask)/2
+    return (bid + ask) / 2
+
 
 if __name__ == "__main__":
     try:
