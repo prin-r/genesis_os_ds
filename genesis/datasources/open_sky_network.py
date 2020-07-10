@@ -4,9 +4,7 @@ import json
 import urllib.request
 import sys
 
-OPEN_WEATHER_MAP_URL = (
-    "https://opensky-network.org/api/flights/{}?airport={}&begin={}&end={}"
-)
+OPEN_WEATHER_MAP_URL = "https://opensky-network.org/api/flights/{}?airport={}&begin={}&end={}"
 
 
 def make_json_request(url):
@@ -16,7 +14,6 @@ def make_json_request(url):
 def main(city, main_field, sub_field):
     random = make_json_request(OPEN_WEATHER_MAP_URL.format(city))
     return str(random[main_field][sub_field])
-    raise ValueError("unknown city, main_field, or sub_field")
 
 
 if __name__ == "__main__":

@@ -14,7 +14,6 @@ def make_json_request(url):
 def main(length):
     random = make_json_request(ANU_URL.format(length))
     return ", ".join(str(x) for x in random["data"])
-    raise ValueError("unknown length: {}".format(length))
 
 
 if __name__ == "__main__":

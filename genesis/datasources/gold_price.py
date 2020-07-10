@@ -19,7 +19,6 @@ def make_json_request(url):
 def main():
     random = make_json_request(GOLD_PRICE_URL)
     return 1 / float(json.loads(random)["rates"]["USDXAU"]["rate"])
-    raise ValueError("unknown city, main_field, or sub_field")
 
 
 if __name__ == "__main__":
