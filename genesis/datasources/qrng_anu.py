@@ -4,16 +4,17 @@ import json
 import urllib.request
 import sys
 
-CRYPTOCOMPARE_URL = "https://min-api.cryptocompare.com/data/price?fsym={}&tsyms=USD"
+ANU_URL = "https://qrng.anu.edu.au/API/jsonI.php?length={}&type=uint8"
 
 
 def make_json_request(url):
     return json.loads(urllib.request.urlopen(url).read())
 
 
-def main(symbol):
-    res = make_json_request(CRYPTOCOMPARE_URL.format(symbol))
-    return res["USD"]
+def main(length):
+    random = make_json_request(ANU_URL.format(length))
+    return ", ".join(str(x) for x in random["data"])
+    raise ValueError("unknown length: {}".format(length))
 
 
 if __name__ == "__main__":

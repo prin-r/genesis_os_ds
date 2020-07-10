@@ -4,7 +4,9 @@ import json
 import urllib.request
 import sys
 
-CRYPTOCOMPARE_URL = "https://min-api.cryptocompare.com/data/price?fsym={}&tsyms=USD"
+CRYPTOCOMPARE_URL = (
+    "https://min-api.cryptocompare.com/data/symbol/histoday?fsym={}&tsym=USD&limit=1"
+)
 
 
 def make_json_request(url):
@@ -13,7 +15,7 @@ def make_json_request(url):
 
 def main(symbol):
     res = make_json_request(CRYPTOCOMPARE_URL.format(symbol))
-    return res["USD"]
+    return res["Data"][0]["total_volume_total"]
 
 
 if __name__ == "__main__":

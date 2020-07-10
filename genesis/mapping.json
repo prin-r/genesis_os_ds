@@ -22,61 +22,61 @@
       "id": 4,
       "name": "Open Weather Map Weather Data",
       "description": "Retrieves current weather information from https://www.openweathermap.org",
-      "filename": "open_weather_map.sh"
+      "filename": "open_weather_map.py"
     },
     {
       "id": 5,
       "name": "FreeForexAPI Gold Price",
       "description": "Retrives current gold price from https://www.freeforexapi.com",
-      "filename": "gold_price.sh"
+      "filename": "gold_price.py"
     },
     {
       "id": 6,
       "name": "Alpha Vantage Stock Price",
       "description": "Retrives current price of a stock from https://www.alphavaage.co",
-      "filename": "alphavantage.sh"
+      "filename": "alphavantage.py"
     },
     {
       "id": 7,
       "name": "Blockchain.info Bitcoin Block Count",
       "description": "Retrives latest Bitcoin block height from https://www.blockchain.info",
-      "filename": "bitcoin_count.sh"
+      "filename": "bitcoin_count.py"
     },
     {
       "id": 8,
       "name": "BlockCypher Bitcoin Block Hash",
       "description": "Retrives Bitcoin block hash at a given block height from https://blockcypher.com",
-      "filename": "bitcoin_hash.sh"
+      "filename": "bitcoin_hash.py"
     },
     {
       "id": 9,
       "name": "CoinGecko Cryptocurrency Trading Volume",
       "description": "Retrieves current trading volume of a cryptocurrency from https://www.coingecko.com",
-      "filename": "coingecko_volume.sh"
+      "filename": "coingecko_volume.py"
     },
     {
       "id": 10,
       "name": "CryptoCompare Cryptocurrency Trading Volume",
       "description": "Retrieves current trading volume of a cryptocurrency from https://www.cryptocompare.com",
-      "filename": "crypto_compare_volume.sh"
+      "filename": "crypto_compare_volume.py"
     },
     {
       "id": 11,
       "name": "ETH Gas Station Current Ethereum Gas Price",
       "description": "Retrieves current Ethereum gas price from https://ethgasstation.info",
-      "filename": "ethgasstation.sh"
+      "filename": "ethgasstation.py"
     },
     {
       "id": 12,
       "name": "Open Sky Network Flight Data",
       "description": "Retrieves flight information from https://opensky-network.org",
-      "filename": "open_sky_network.sh"
+      "filename": "open_sky_network.py"
     },
     {
       "id": 13,
       "name": "Quantum Random Number Generator",
       "description": "Retrieves array of random number from https://qrng.anu.edu.au",
-      "filename": "qrng_anu.sh"
+      "filename": "qrng_anu.py"
     },
     {
       "id": 14,
