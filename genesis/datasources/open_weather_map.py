@@ -4,16 +4,18 @@ import json
 import urllib.request
 import sys
 
-CRYPTOCOMPARE_URL = "https://min-api.cryptocompare.com/data/price?fsym={}&tsyms=USD"
+OPEN_WEATHER_MAP_URL = (
+    "https://api.openweathermap.org/data/2.5/weather?q={}&appid=ac7c05361f8f91652eab609377134ab7"
+)
 
 
 def make_json_request(url):
     return json.loads(urllib.request.urlopen(url).read())
 
 
-def main(symbol):
-    res = make_json_request(CRYPTOCOMPARE_URL.format(symbol))
-    return res["USD"]
+def main(city, main_field, sub_field):
+    random = make_json_request(OPEN_WEATHER_MAP_URL.format(city))
+    return str(random[main_field][sub_field])
 
 
 if __name__ == "__main__":

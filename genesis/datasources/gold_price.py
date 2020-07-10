@@ -4,7 +4,7 @@ import json
 import urllib.request
 import sys
 
-BINANCE_URL = "https://api.binance.com/api/v1/depth?symbol={}USDT&limit=5"
+GOLD_PRICE_URL = "https://www.freeforexapi.com/api/live?pairs=USDXAU"
 
 
 def make_json_request(url):
@@ -13,14 +13,12 @@ def make_json_request(url):
         "User-Agent",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36",
     )
-    return json.loads(urllib.request.urlopen(req).read())
+    return urllib.request.urlopen(req).read()
 
 
-def main(symbol):
-    res = make_json_request(BINANCE_URL.format(symbol))
-    bid = float(res["bids"][0][0])
-    ask = float(res["asks"][0][0])
-    return (bid + ask) / 2
+def main():
+    random = make_json_request(GOLD_PRICE_URL)
+    return 1 / float(json.loads(random)["rates"]["USDXAU"]["rate"])
 
 
 if __name__ == "__main__":

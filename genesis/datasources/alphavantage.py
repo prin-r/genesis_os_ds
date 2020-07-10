@@ -4,7 +4,9 @@ import json
 import urllib.request
 import sys
 
-BINANCE_URL = "https://api.binance.com/api/v1/depth?symbol={}USDT&limit=5"
+ALPHAVANTAGE_URL = (
+    "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={}&apikey={}"
+)
 
 
 def make_json_request(url):
@@ -16,11 +18,9 @@ def make_json_request(url):
     return json.loads(urllib.request.urlopen(req).read())
 
 
-def main(symbol):
-    res = make_json_request(BINANCE_URL.format(symbol))
-    bid = float(res["bids"][0][0])
-    ask = float(res["asks"][0][0])
-    return (bid + ask) / 2
+def main(symbol, api_key):
+    random = make_json_request(ALPHAVANTAGE_URL.format(symbol, api_key))
+    return random["Global Quote"]["05. price"]
 
 
 if __name__ == "__main__":

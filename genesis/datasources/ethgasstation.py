@@ -4,7 +4,7 @@ import json
 import urllib.request
 import sys
 
-BINANCE_URL = "https://api.binance.com/api/v1/depth?symbol={}USDT&limit=5"
+ETH_GAS_STATION_URL = "https://ethgasstation.info/json/ethgasAPI.json"
 
 
 def make_json_request(url):
@@ -16,11 +16,9 @@ def make_json_request(url):
     return json.loads(urllib.request.urlopen(req).read())
 
 
-def main(symbol):
-    res = make_json_request(BINANCE_URL.format(symbol))
-    bid = float(res["bids"][0][0])
-    ask = float(res["asks"][0][0])
-    return (bid + ask) / 2
+def main(type):
+    price = make_json_request(ETH_GAS_STATION_URL)
+    return price[type]
 
 
 if __name__ == "__main__":
