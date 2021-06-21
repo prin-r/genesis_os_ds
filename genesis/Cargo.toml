@@ -1,8 +1,8 @@
 [workspace]
 members = [
-    "oracle_scripts/crypto_price",
     "oracle_scripts/gold_price",
     "oracle_scripts/alphavantage",
+    "oracle_scripts/btc_parachain",
     "oracle_scripts/bitcoin_block_count",
     "oracle_scripts/bitcoin_block_hash",
     "oracle_scripts/coingecko_volume",
@@ -18,10 +18,15 @@ members = [
     "oracle_scripts/nba_rapid_api",
     "oracle_scripts/cirium_flight_rate",
     "oracle_scripts/cirium_flight_status",
-    "oracle_scripts/bitcoin_fees",
     "oracle_scripts/terra_os_nat",
     "oracle_scripts/terra_os_eob",
-    "oracle_scripts/nft_goalserve_odd",
-    "oracle_scripts/nft_goalserve_score",
+    "oracle_scripts/goalserve_odd",
+    "oracle_scripts/goalserve_score",
     "oracle_scripts/asset_balance",
+    "oracle_scripts/twap_price_binance",
+    "oracle_scripts/linear_crypto_price",
+    "oracle_scripts/deribit_atm_iv",
+    "oracle_scripts/linear_index",
+    "oracle_scripts/stocks-testnet",
+    "oracle_scripts/bsc_crypto_price",
 ]

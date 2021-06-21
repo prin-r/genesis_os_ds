@@ -1,5 +1,5 @@
 [package]
-name = "nft_goalserve_score"
+name = "bsc_crypto_price"
 version = "0.1.0"
 authors = ["Band Protocol <dev@bandprotocol.com>"]
 edition = "2018"
@@ -11,4 +11,6 @@ crate-type = ["cdylib"]
 
 [dependencies]
 owasm2 = { version = "0.1.8"}
-obi = { version = "0.0.1" }
+obi = { version = "0.0.2" }
+lazy_static = "1.4.0"
+

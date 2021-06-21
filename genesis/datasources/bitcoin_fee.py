@@ -9,22 +9,28 @@ BLOCKCHAIN_URL = "https://bitcoinfees.earn.com/api/v1/fees/recommended"
 
 def make_json_request(url):
     req = urllib.request.Request(url)
-    req.add_header(
-        "User-Agent",
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36",
-    )
+    req.add_header("User-Agent", "")
     return urllib.request.urlopen(req).read()
 
 
-def main():
+def main(symbol):
     raw = make_json_request(BLOCKCHAIN_URL).decode()
     rawJSON = json.loads(raw)
-    return f"{rawJSON['fastestFee']} {rawJSON['halfHourFee']} {rawJSON['hourFee']}"
+
+    [_base, speed] = symbol.split("_")
+    if speed == "F":
+        return rawJSON["fastestFee"]
+    elif speed == "HH":
+        return rawJSON["halfHourFee"]
+    elif speed == "H":
+        return rawJSON["hourFee"]
+
+    raise Exception(f"Error: The symbol {symbol} was not found or misformed.")
 
 
 if __name__ == "__main__":
     try:
-        print(main())
+        print(main(*sys.argv[1:]))
     except Exception as e:
         print(str(e), file=sys.stderr)
         sys.exit(1)

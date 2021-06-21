@@ -1,36 +1,32 @@
 use obi::{OBIDecode, OBIEncode, OBISchema};
-use owasm2::{prepare_entry_point, execute_entry_point, ext, oei};
+use owasm2::{execute_entry_point, ext, oei, prepare_entry_point};
 
 #[derive(OBIDecode, OBISchema)]
 struct Input {
-    date: String,
-    home_team: String,
-    away_team: String,
+    symbol: String,
+    multiplier: u64,
 }
 
 #[derive(OBIEncode, OBISchema)]
 struct Output {
-    home_team_score: u32,
-    away_team_score: u32,
+    atm_iv: u64,
 }
 
 #[no_mangle]
 fn prepare_impl(input: Input) {
-    let Input {
-        date,
-        home_team,
-        away_team,
-    } = input;
-    // NBA rapid API data source
-    oei::ask_external_data(1, 83, format!("{} {} {}", date, home_team, away_team).as_bytes());
+    // Deribit atm iv data source
+    oei::ask_external_data(
+        1,
+        26,
+        input.symbol.as_bytes(),
+    );
 }
 
 #[no_mangle]
 fn execute_impl(input: Input) -> Output {
-    let majority = (ext::load_majority::<String>(1)).unwrap().split(" ").map(|x| x.parse().unwrap()).collect::<Vec<u32>>();
+    let avg: f64 = (ext::load_median(1)).unwrap();
     Output {
-        home_team_score: majority[0],
-        away_team_score: majority[1],
+        atm_iv: (avg * input.multiplier as f64) as u64,
     }
 }
 
@@ -52,7 +48,7 @@ mod tests {
         let output_schema = get_schema(String::from("Output"), &schema);
         println!("{}/{}", input_schema, output_schema);
         assert_eq!(
-            "{date:string,home_team:string,away_team:string}/{home_team_score:u32,away_team_score:u32}",
+            "{symbol:string,multiplier:u64}/{atm_iv:u64}",
             format!("{}/{}", input_schema, output_schema),
         );
     }
