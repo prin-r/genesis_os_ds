@@ -12,11 +12,13 @@ def make_json_request(url):
 
 
 def main(symbol):
-    raw = make_json_request(YAHOO_URL.format(symbol)).decode()
+    # raw = make_json_request(YAHOO_URL.format(symbol)).decode()
+    print(make_json_request(YAHOO_URL.format(symbol)).decode())
+    return
     data = "".join(raw.split("\n")).split("root.App.main = ")[1].split(";}(this)")[0]
-    return json.loads(data)["context"]["dispatcher"]["stores"]["QuoteSummaryStore"][
-        "price"
-    ]["regularMarketPrice"]["raw"]
+    return json.loads(data)["context"]["dispatcher"]["stores"]["QuoteSummaryStore"]["price"][
+        "regularMarketPrice"
+    ]["raw"]
 
 
 if __name__ == "__main__":
